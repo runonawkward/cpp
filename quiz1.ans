@@ -1,0 +1,25 @@
+#include "stdio.h" /*using "" instead of <> */
+mian{} /*** main not main, missing return value, {} instead of ()***/
+( /* ( instead of { /*
+Int x,y,z; /*** declare variables...capital I ***/
+Float f; /* capital F */
+char c = A; /*** no '' ***/
+ double do; /* reserve word do */
+ /** Let us initialize some variables * /
+ x = 5:
+ y = 10.; /* float in int */
+ z = 7.5; /* float in int */
+  f = 105.10;
+  If( y = 10 ); /* test if y equals 10; assignment instead of equality */
+  x =+ 20; /* add 20 to x;should be += /*
+  z = y + x ; /*** ***/
+  f = z**3; /* raise z to the third power*/
+  f = z/15 /* missing ; */
+   do = z*f; /* yet another product */
+    y = (integer)z; /* cast z into an integer */
+    /* convert character into lower character */
+    c = c - 32. /* extra . no ;*/
+    Printf("x = %d y = %d z = %-5d\n",x,y,z); /* only x is actualy an int by now */
+    Printf("f = %d \t %X \t %8.4f\n",f,f,f); /* float to hex? */
+     Printf(“do = %i\n”, do); /* do should be a double %lf*/
+     Printf{"c = %c \t %X \t %o\n" /* (,c,?,?); */
