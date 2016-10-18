@@ -1,0 +1,221 @@
+William Walter
+Intro to C + CPP
+HW#3
+10/18/2016
+
+
+Problem 5-2:
+#include <stdio.h>
+int main()
+{
+  int n = 1;
+  printf("n\tn^2\n------------\n");
+  for (; n <= 10; n++)
+  {
+    printf("%-2d\t%-2d\n", n, n*n);
+  }
+  return 0;
+}
+n	n^2
+------------
+1 	1 
+2 	4 
+3 	9 
+4 	16
+5 	25
+6 	36
+7 	49
+8 	64
+9 	81
+10	100
+
+Problem 5-4:
+#include <stdio.h>
+float factorial(int x)
+{
+  float value = x;
+  --x;
+  for (; x > 0;--x)
+  {
+    value = value * x;
+  }
+  return value;
+}
+int main()
+{
+  printf("N\tN!\n-----------\n");
+  int counter = 1;
+  float value = 0;
+  for ( ; counter <=10; ++counter)
+  {
+    printf("%-2d\t%-2f\n", counter, factorial(counter));
+  }
+  return 0;
+}
+N	N!
+-----------
+1 	1.000000
+2 	2.000000
+3 	6.000000
+4 	24.000000
+5 	120.000000
+6 	720.000000
+7 	5040.000000
+8 	40320.000000
+9 	362880.000000
+10	3628800.000000
+
+Problem 5-6
+#include <stdio.h>
+int main()
+{
+  int n, number, triangle;
+  printf("What triangular number do you want?\n");
+  scanf("%d", &number);
+  triangle = 0;
+  for ( n = 1; n <=number; ++n)
+  {
+    triangle = triangle +n;
+  }
+  printf("Triangular number %d is %d\n", number, triangle);
+  printf("%-2d\t%-2d\n", number, triangle);
+  return 0;
+
+
+What triangular number do you want?
+9
+Triangular number 9 is 45
+9       45
+
+Problem 5-11
+#include <stdio.h>
+int main()
+{
+  int input,sum = 0;
+  printf("Please input an integer>");
+  scanf("%d", &input);
+  while ( input > 0 )
+  {
+    sum = sum + input % 10;
+    input = input /10;
+  }
+  printf("The sum of the digits of the integer is %d\n", sum);
+  return 0;
+}
+
+Please input an integer>5678
+The sum of the digits of the integer is 26
+
+Problem 6-2:
+#include <stdio.h>
+int main()
+{
+  int first,second;
+  printf("Please input an integer.\n");
+  scanf("%d", &first);
+  printf("Please input another integer.\n");
+  scanf("%d", &second);
+  if ((first > second) && (second > 0))
+  {
+    if (first % second == 0)
+      printf("%d is evenly divisible by %d\n", first, second);
+    else
+      printf("%d is not evenly divisible by %d\n", first, second);
+  }
+  else
+    printf("%d is not evenly divisible by %d\n", first, second);
+
+  return 0;
+}
+
+Please input an integer.
+25
+Please input another integer.
+5
+25 is evenly divisible by 5
+
+
+Problem 6-3:
+#include <stdio.h>
+int main()
+{
+  int first, second;
+  printf("Please input an integer\n");
+  scanf("%d", &first);
+  printf("Please input another integer\n");
+  scanf("%d", &second);
+  if (second > 0)
+    printf("%d divided by %d equals %.3f\n", first, second, (float)first/second);
+
+  return 0;
+}
+
+Please input an integer
+15
+Please input another integer
+27
+15 divided by 27 equals 0.556
+
+Problem 6-6:
+#include <stdio.h>
+int main()
+{
+  int input,value,reverse = 0;
+  printf("Please input an integer \n");
+  scanf("%d", &input);
+  if (input == 0)
+  {
+    printf("zero\n");
+    return 0;
+  }
+  while (input > 0)
+  {
+    value = input % 10;
+    reverse = reverse * 10 + value;
+    input = input /10;
+  }
+  while (reverse > 0 )
+  {
+    value = reverse % 10;
+    reverse = reverse /10;
+    switch (value)
+    {
+      case 0:
+        printf("zero ");
+        break;
+      case 1:
+        printf("one ");
+        break;
+      case 2:
+        printf("two ");
+        break;
+      case 3:
+        printf("three ");
+        break;
+      case 4:
+        printf("four ");
+        break;
+      case 5:
+        printf("five ");
+        break;
+      case 6:
+        printf("six ");
+        break;
+      case 7:
+        printf("seven ");
+        break;
+      case 8:
+        printf("eight ");
+        break;
+      case 9:
+        printf("nine ");
+        break;
+    }
+  }
+  printf("\n");
+  return 0;
+}
+
+Please input an integer
+8675309
+eight six seven five three zero nine
