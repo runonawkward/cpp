@@ -1,0 +1,8 @@
+this question is stupid. 
+
+The number of iterations will be a function of epsilon. The smaller epsilon is
+the more likely you are to loop infinitely due to a loss of precision. 
+
+the first guess is always 1 then x+1/2  (x/(x+1/2) + ((x+1/2)/2)) /2)
+about 7 loops of precision before you loop forever at .00001
+
