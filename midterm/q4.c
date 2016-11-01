@@ -6,41 +6,64 @@
  * count the number of words
  * */
 #include <stdio.h>
-#define IS_CHAR(x)    (((x) >= 'A' && (x) <= 'Z') || ((x) >= 'a' && (x) <= 'z') ? 1:0)
-#define IS_BLANK(x)    (((x) == '\t' || (x) == '32') ? 1:0)
-void cap(char prose[]);
-int count(char prose[]);
+int is_char(char c);
+int is_blank(char c);
+void cap(char *prose);
+int count(char *prose);
 int main()
 {
-  char prose[];
-  printf("Please enter some prose. Finish entry with RETURN");
-  scanf("%s", prose);
+  char input[1000] = "This is a test of my thing. ? I need to worry about.";
+  printf("%s\n", input);
+  cap(input);
+  printf("%s\n", input);
+  printf("There are %d words in the input, assuming there is no errant punctuation.\n", count(input));
 }
 
-void cap(char prose[])
+int is_char(char c)
 {
-  int index = 0;
-  char current;
+  return (((c) >= 'A' && (c) <= 'Z') || ((c) >= 'a' && (c) <= 'z') ? 1:0 );
+}
+int is_blank(char c)
+{
+  return (((c) == '\t' || (c) == ' ') ? 1:0);
+}
+void cap(char *prose)
+{
   int in_word = 0;
-  while( prose[index] != '\0')
+  while( *prose != '\0')
   {
-   
-    if( IS_CHAR(prose[index]))
+    if( is_char(*prose))
     {
       if(in_word == 0)
       { 
         in_word = 1;
-        if (prose[index] > 'Z')
-          prose[index] -= 32;
+        if (*prose > 'Z')
+          *prose -= 32;
       }
       else
-        ++index;
+        ++prose;
         continue;
     }
-    else if( IS_BLANK(prose[index]))
+    else if( is_blank(*prose))
     {
       in_word = 0;
     } 
-    ++index;
+    ++prose;
   }
+}
+int count(char *prose)
+{
+  int in_word = 0, count = 0;
+  while ( *prose != '\0')
+  {
+    if( !is_blank(*prose) && !in_word)
+    {
+      ++count;
+      in_word = 1;
+    }
+    if( is_blank(*prose))
+      in_word = 0;
+    ++prose;
+  }
+  return count;
 }
