@@ -8,7 +8,7 @@ int main()
   int i, response;
   for (i = 1; i <= 1000; ++i )
   {
-    printf("Please enter our response. Enter 999 to end submission\n");
+    printf("Please enter your response, 1-10. Enter 999 to end submission\n");
     scanf("%d", &response);
     if (response == 999)
     {

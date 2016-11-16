@@ -7,7 +7,7 @@ int main()
   unsigned int pattern = 0xe1f4;
   int start_point = 17, end_point = 4;
   unsigned int answer = bitpat_get(pattern, start_point, end_point);
-  printf("Bits %d to %d of unsigned int %x are %x\n", start_point, start_point + end_point, pattern, answer);
+  printf("Bits %d to %d of unsigned int %.32x are %.32x\n", start_point, start_point + end_point, pattern, answer);
   return 0;
 }
 int get_size(void)
