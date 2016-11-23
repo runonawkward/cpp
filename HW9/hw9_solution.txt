@@ -1,0 +1,158 @@
+William Walter
+Intro to C + CPPw
+Fall 2016
+HW Set 9
+
+#include <stdio.h>
+int main()
+{
+  char in_name[64], out_name[64],c;
+  FILE *in,*out;
+
+  printf("please enter the name of the file to copy.\n");
+  scanf("%63s", in_name);
+  printf("please enter the name of the destination file.\n");
+  scanf("%63s", out_name);
+  if( (in = fopen(in_name,"r")) == NULL )
+  {
+    printf("%s could not be opened for reading.\n", in_name);
+    return 1;
+  }
+  if((out= fopen(out_name,"w")) == NULL)
+  {
+    printf("%s could not be opened for writing.\n", out_name);
+    fclose(in);
+    return 1;
+  }
+  while ( (c = getc(in)) != EOF )
+  {
+    if (( c >= 'a' ) && ( c <= 'z'))
+      c -= 32;
+    putc(c, out);
+  }
+  fclose(in);
+  fclose(out);
+  return 0;
+}
+
+[wwalter@WWALTERMAC1 HW9 (master %=) (global)]$ ./ans16_3.out
+please enter the name of the file to copy.
+file1.txt
+please enter the name of the destination file.
+file2.txt
+
+[wwalter@WWALTERMAC1 HW9 (master *%=) (global)]$ cat file1.txt
+this is all in lower case.
+
+This is not.
+?
+This has many lines.
+
+
+
+aaaaaaaaaaaaaaaaaaaaa
+bbbbbbbbbbbbbbbbbbbb
+cccccccccccccccccc
+ddddddddddddddddd
+
+[wwalter@WWALTERMAC1 HW9 (master *%=) (global)]$ cat file2.txt
+THIS IS ALL IN LOWER CASE.
+
+THIS IS NOT.
+?
+THIS HAS MANY LINES.
+
+
+
+AAAAAAAAAAAAAAAAAAAAA
+BBBBBBBBBBBBBBBBBBBB
+CCCCCCCCCCCCCCCCCC
+DDDDDDDDDDDDDDDDD
+
+
+
+#include <stdio.h>
+int main()
+{
+  char in_name1[64],in_name2[64], c1,c2;
+  FILE *in1,*in2;
+
+  printf("please enter the name of the first input file.\n");
+  scanf("%63s", in_name1);
+  printf("please enter the name of the second input file.\n");
+  scanf("%63s", in_name2);
+  if( (in1= fopen(in_name1,"r")) == NULL )
+  {
+    printf("%s could not be opened for reading.\n", in_name1);
+    return 1;
+  }
+  if((in2 = fopen(in_name2,"r")) == NULL)
+  {
+    printf("%s could not be opened for reading.\n", in_name2);
+    fclose(in1);
+    return 1;
+  }
+  do {
+    while( (c1 = getc(in1)) != '\n' && c1 != EOF)
+    {
+     putc(c1,stdout); 
+    }
+    putc('\n', stdout);
+    while( (c2 = getc(in2)) != '\n' && c2 != EOF)
+    { 
+     putc(c2,stdout); 
+    }
+    putc('\n', stdout);
+  } while ( c1 != EOF && c2 != EOF);
+  if (c1 == EOF && c2 != EOF)
+  {
+    while( (c2 = getc(in2)) != EOF)
+    {
+     putc(c2,stdout); 
+    }
+  }
+  else if (c1 != EOF && c2 == EOF)
+  {
+    while( (c1 = getc(in1)) != EOF)
+    {
+     putc(c1,stdout); 
+    }
+  }
+  fclose(in1);
+  fclose(in2);
+  return 0;
+}
+
+./ans16_4.out
+please enter the name of the first input file.
+file1.txt
+please enter the name of the second input file.
+file2.txt
+this is all in lower case.
+THIS IS ALL IN LOWER CASE.
+
+
+This is not.
+THIS IS NOT.
+?
+?
+This has many lines.
+THIS HAS MANY LINES.
+
+
+
+
+
+
+aaaaaaaaaaaaaaaaaaaaa
+AAAAAAAAAAAAAAAAAAAAA
+bbbbbbbbbbbbbbbbbbbb
+BBBBBBBBBBBBBBBBBBBB
+cccccccccccccccccc
+CCCCCCCCCCCCCCCCCC
+ddddddddddddddddd
+DDDDDDDDDDDDDDDDD
+
+
+
+
