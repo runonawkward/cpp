@@ -1,0 +1,319 @@
+#include <stdio.h>
+char* string_cat(char * s1, char * s2);
+int string_size(char*s);
+int main()
+{
+  char s1[80],s2[40];
+  char *ans;
+  printf("Input 0 to quit.\n");
+  while(1){
+  printf("Please input a string characters, followed by a new line.\n>");
+  fgets(&s1[0],81,stdin);
+  if(s1[0] == '0')
+    break;
+  printf("Please input a string of less than 39 characters, followed by a new line.\n>");
+  fgets(&s2[0],41,stdin);
+  if(s2[0] == '0')
+    break;
+  printf("string1: %sstring2: %sinput size: %d\n", s1, s2, string_size(s1) + string_size(s2));
+  ans = string_cat(s1,s2);
+  printf("ans: %s\n", ans);
+  }
+}
+char* string_cat(char * s1, char * s2)
+{
+  int counter = 0, size;
+  char * start = s1;
+  char * string2 = s2;
+  size = string_size(start) + string_size(string2);
+  if( size > 80 )
+    return NULL;
+
+  while(*start != '\n')
+  {
+    //find the address of the end of string 1
+    ++start;
+    ++counter;
+  }
+  while(*string2 != '\n')
+  {
+    
+    *start = *string2++;
+    ++start;
+    ++counter;
+  }
+  *start = '\0';
+  // This will be max 78 cause of the stripped new line chars
+  printf("output size: %d\n", counter);
+  return s1;
+}
+int string_size(char*s)
+{
+  int counter = 0;
+  while(*s)
+  {
+    ++counter;
+    ++s;
+  }
+  return counter;
+}
+
+Input 0 to quit.
+Please input a string characters, followed by a new line.
+>one two three four five six seven eigh.
+Please input a string of less than 39 characters, followed by a new line.
+>one two three four five six seven eigh.
+string1: one two three four five six seven eigh.
+string2: one two three four five six seven eigh.
+input size: 80
+output size: 78
+ans: one two three four five six seven eigh.one two three four five six seven eigh.
+Please input a string characters, followed by a new line.
+>one two three four five six seven eigh..
+Please input a string of less than 39 characters, followed by a new line.
+>one two three four five six seven eigh.
+string1: one two three four five six seven eigh..
+string2: one two three four five six seven eigh.
+input size: 81
+ans: (null)
+Please input a string characters, followed by a new line.
+>one
+Please input a string of less than 39 characters, followed by a new line.
+>
+string1: one
+string2:
+input size: 5
+output size: 3
+ans: one
+Please input a string characters, followed by a new line.
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+void alpha_sort(char ** array_ptr, int size);
+int main()
+{
+  char buffer[80];
+  char * line_array[40];
+  char * temp;
+  int num_lines = 0, len;
+  printf("Enter up to 40 lines of text. End with a line starting with #\n");
+  while(1)
+  {
+    fgets(&buffer[0], 80, stdin);
+    if(buffer[0] == '#')
+      break;
+    len = strlen(buffer);
+    line_array[num_lines] = malloc(len * sizeof(char));
+    strcpy(line_array[num_lines], buffer);
+    ++num_lines;
+    if(num_lines >= 40)
+      break;
+  }
+  for(int i = 0; i < num_lines; ++i){
+    printf("%s", line_array[i]);
+  }
+  printf("----------------------\n");
+  for(int i = 0; i < num_lines; ++i){
+    switch(i){
+      case 4:
+        temp = line_array[i];
+        line_array[i] = line_array[num_lines-2];
+        line_array[num_lines-2] = temp;
+        break;
+      case 5:
+        temp = line_array[i];
+        line_array[i] = line_array[num_lines-1];
+        line_array[num_lines-1] = temp;
+        break;
+    }
+    printf("%s", line_array[i]);
+  }
+  printf("----------------------\n");
+  alpha_sort(line_array, num_lines);
+  for(int i = 0; i < num_lines; ++i)
+  {
+    printf("%s", line_array[i]);
+  }
+}
+
+void alpha_sort(char ** array_ptr, int size )
+{
+  char * temp_str;
+  int swapped = 0, comp;
+  for ( int i = 1; i < size; ++i )
+  {
+    comp = strcmp(*(array_ptr +(i-1)), *(array_ptr+i));
+    if( comp > 0 ){
+      temp_str = *(array_ptr+ (i-1));
+      *(array_ptr+ (i-1)) = *(array_ptr + i);
+      *(array_ptr+i) = temp_str;
+      swapped = 1;
+    }
+  }
+  if( swapped)
+   alpha_sort(array_ptr, size);
+}
+
+one 1
+two 2
+three 3
+four 4
+five 5
+six 6
+seven 7
+eight 8
+nine 9
+ten 10
+eleven 11
+twelve 12
+thirteen 13
+fourteen 14
+fifteen 15
+sixteen 16
+seventeen 17
+eighteen 18
+nineteen 19
+twenty 20
+twentyone 21
+twentytwo 22
+twentythree 23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+Enter up to 40 lines of text. End with a line starting with #
+one 1
+two 2
+three 3
+four 4
+five 5
+six 6
+seven 7
+eight 8
+nine 9
+ten 10
+eleven 11
+twelve 12
+thirteen 13
+fourteen 14
+fifteen 15
+sixteen 16
+seventeen 17
+eighteen 18
+nineteen 19
+twenty 20
+twentyone 21
+twentytwo 22
+twentythree 23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+----------------------
+one 1
+two 2
+three 3
+four 4
+39
+40
+seven 7
+eight 8
+nine 9
+ten 10
+eleven 11
+twelve 12
+thirteen 13
+fourteen 14
+fifteen 15
+sixteen 16
+seventeen 17
+eighteen 18
+nineteen 19
+twenty 20
+twentyone 21
+twentytwo 22
+twentythree 23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+five 5
+six 6
+----------------------
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+eight 8
+eighteen 18
+eleven 11
+fifteen 15
+five 5
+four 4
+fourteen 14
+nine 9
+nineteen 19
+one 1
+seven 7
+seventeen 17
+six 6
+sixteen 16
+ten 10
+thirteen 13
+three 3
+twelve 12
+twenty 20
+twentyone 21
+twentythree 23
+twentytwo 22
+two 2
