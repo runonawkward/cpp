@@ -24,7 +24,7 @@ int main()
   for(int i = 0; i < num_lines; ++i){
     printf("%s", line_array[i]);
   }
-  printf("\n\n");
+  printf("----------------------\n");
   for(int i = 0; i < num_lines; ++i){
     switch(i){
       case 4:
@@ -40,7 +40,7 @@ int main()
     }
     printf("%s", line_array[i]);
   }
-  printf("\n");
+  printf("----------------------\n");
   alpha_sort(line_array, num_lines);
   for(int i = 0; i < num_lines; ++i)
   {
@@ -56,9 +56,9 @@ void alpha_sort(char ** array_ptr, int size )
   {
     comp = strcmp(*(array_ptr +(i-1)), *(array_ptr+i));
     if( comp > 0 ){
-      temp_str = array_ptr[i-1];
-      array_ptr[i-1] = array_ptr[i];
-      array_ptr[i] = temp_str;
+      temp_str = *(array_ptr+ (i-1));
+      *(array_ptr+ (i-1)) = *(array_ptr + i);
+      *(array_ptr+i) = temp_str;
       swapped = 1;
     }
   }
