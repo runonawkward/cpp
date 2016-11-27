@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-void swap(char * a, char * b);
 void alpha_sort(char ** array_ptr, int size);
 int main()
 {
@@ -49,28 +48,21 @@ int main()
   }
 }
 
-void swap(char * a, char * b){
-  char * temp;
-  temp = b;
-  b = a;
-  a = temp;
-}
-
 void alpha_sort(char ** array_ptr, int size )
 {
-  char * cur_str;
   char * temp_str;
   int swapped = 0, comp;
   for ( int i = 1; i < size; ++i )
   {
-    cur_str = *(array_ptr + i);
-    comp = strcmp(cur_str-1,cur_str);
+    comp = strcmp(*(array_ptr +(i-1)), *(array_ptr+i));
     if( comp > 0 ){
-      swap(cur_str-1, cur_str);
+      temp_str = array_ptr[i-1];
+      array_ptr[i-1] = array_ptr[i];
+      array_ptr[i] = temp_str;
       swapped = 1;
     }
   }
   if( swapped)
-    alpha_sort(array_ptr, size);
+   alpha_sort(array_ptr, size);
 }
 
